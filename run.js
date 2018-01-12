@@ -10,6 +10,41 @@ function uuid() {
 
 piskel = [];
 
+var zoom = document.getElementById("zoom");
+var zoomCurr = 10;
+var zoomRatio = zoomCurr/10;
+
+
+zoom.children[0].addEventListener("click", function(Ev) {
+  if(zoomCurr > 0) {
+    zoomCurr -= 1;
+    zoomRatio = zoomCurr/10;
+  }
+
+  zoom.children[2].children[0].innerText = (zoomRatio * 100) + "%";
+
+  chrome.storage.local.set({ zoom: zoomRatio }, function() {});
+  piskel[0].setZoom(zoomRatio);
+});
+
+zoom.children[1].addEventListener("click", function(Ev) {
+  if(zoomCurr <= 9) {
+    zoomCurr += 1;
+    zoomRatio = zoomCurr/10;
+  }
+
+  zoom.children[2].children[0].innerText = (zoomRatio * 100) + "%";
+
+  chrome.storage.local.set({ zoom: zoomRatio }, function() {});
+  piskel[0].setZoom(zoomRatio);
+});
+
+
+/*
+ *
+ */
+
+
 document.onreadystatechange = function() { if(document.readyState == 'complete') {
   var webview = document.createElement("webview");
   var dialog = document.getElementById("dialog-div");
@@ -20,8 +55,21 @@ document.onreadystatechange = function() { if(document.readyState == 'complete')
   webview.src = "piskel/index.html";
   webview.partition = "persist:static";
 
+  chrome.storage.local.get("zoom", function(Items) {
+    if(typeof Items != 'undefined') {
+      zoomRatio = Items.zoom;
 
-  webview.setZoom(8/10, function() {});
+      if(zoomRatio != 1) {
+        zoomCurr = zoomRatio * 10;
+      }
+
+      zoom.children[2].children[0].innerText = (zoomRatio * 100) + "%";
+      webview.setZoom(zoomRatio);
+    }
+    else {
+      chrome.storage.local.set({ zoom: zoomRatio }, function() {});
+    }
+  });
 
   webview.addEventListener("dialog", function(Ev) {
     if(Ev.messageType == "confirm") {
@@ -89,6 +137,9 @@ document.onreadystatechange = function() { if(document.readyState == 'complete')
     if(Ev.permission === "download") {
       Ev.request.allow();
     }
+  });
+
+  webview.addEventListener("newwindow", function(Ev) {
   });
 
   piskel.push(document.body.appendChild(webview));

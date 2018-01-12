@@ -59,3 +59,45 @@ webview {
   #dialog-cancel {
     right: 10px;bottom: 10px;
   }
+
+
+#zoom {
+  position: absolute;
+  width: 100px;height: 30px;
+  left: 0;top: 0;
+  //background-color: white;
+  color: white;
+  z-index: 1;
+}
+  #zoom > a {
+    position: absolute;
+    display: table;
+    width: 25%;height: 100%;
+    cursor: pointer;
+  }
+    #zoom > a > span {
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+  #zoom > div {
+    position: absolute;
+    display: table;
+    width: 50%;height: 100%;
+    left: 0;right: 0;
+    margin: auto;
+  }
+    #zoom > div > span {
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+
+  #zoom > a[name="out"] {
+    left: 0;
+  }
+  #zoom > a[name="in"] {
+    right: 0;
+  }
