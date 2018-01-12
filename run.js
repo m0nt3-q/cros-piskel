@@ -56,10 +56,10 @@ document.onreadystatechange = function() { if(document.readyState == 'complete')
   webview.partition = "persist:static";
 
   chrome.storage.local.get("zoom", function(Items) {
-    if(typeof Items != 'undefined') {
+    if(typeof Items.zoom != 'undefined') {
       zoomRatio = Items.zoom;
 
-      if(zoomRatio != 1) {
+      if(typeof zoomRatio != 'undefined' && zoomRatio != 1) {
         zoomCurr = zoomRatio * 10;
       }
 
