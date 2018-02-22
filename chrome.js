@@ -11,7 +11,7 @@ function uuid() {
 chrome.app.runtime.onLaunched.addListener(function() {
   chrome.app.window.create("index.html", {
     "id": "piskel",
-    "icon": "./piskel/logo.png",
+    "icon": "./lib/piskel/logo.png",
     "outerBounds": {
       "width": 900,
       "height": 600
@@ -20,19 +20,19 @@ chrome.app.runtime.onLaunched.addListener(function() {
   function(Win) {
     Win.contentWindow.onload = function() {
       var webview = Win.contentWindow.document.getElementById("piskel-webview");
-      webview.addEventListener("newwindow", function(Ev) {
+      /*webview.addEventListener("newwindow", function(Ev) {
         ////Ev.preventDefault();
 
         chrome.app.window.create("index.html", {
           "id": uuid(),
-          "icon": "./piskel/logo.png",
+          "icon": "./lib/piskel/logo.png",
           "outerBounds": {
             "width": 900,
             "height": 600
           }
         });
 
-      });
+      });*/
     };
   });
 });

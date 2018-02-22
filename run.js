@@ -52,7 +52,7 @@ document.onreadystatechange = function() { if(document.readyState == 'complete')
   dialog.input_ = dialog.children[1];
 
   webview.id = "piskel-webview";
-  webview.src = "piskel/index.html";
+  webview.src = "lib/piskel/index.html";
   webview.partition = "persist:static";
 
   chrome.storage.local.get("zoom", function(Items) {
@@ -71,9 +71,10 @@ document.onreadystatechange = function() { if(document.readyState == 'complete')
     }
   });
 
-  webview.addEventListener("dialog", function(Ev) {
+  webview.ondialog = function(Ev) {
     if(Ev.messageType == "confirm") {
       Ev.dialog.ok("");
+      return;
     }
     if(Ev.messageType == "prompt") {
       dialog.style.display = "block";
@@ -130,16 +131,53 @@ document.onreadystatechange = function() { if(document.readyState == 'complete')
       });
     }
 
-    Ev.dialog.cancel();
-  });
+    //Ev.dialog.cancel();
+  };
 
-  webview.addEventListener("permissionrequest", function(Ev) {
+  webview.onpermissionrequest = function(Ev) {
+    //console.log(Ev);
     if(Ev.permission === "download") {
       Ev.request.allow();
     }
-  });
+  };
 
-  webview.addEventListener("newwindow", function(Ev) {
+  webview.onnewwindow = function(Ev) {
+    //console.log(Ev);
+  };
+
+  webview.onloadabort = function(Ev) {
+    //console.log(Ev);
+  };
+
+  webview.onloadstart = function(Ev) {
+    if(Ev.url == "about:blank") {
+      console.log("trying to go to about:blank");
+      return false;
+    }
+  };
+  webview.onloadstop = function(Ev) {
+    //console.log(Ev);
+    webview.contentWindow.postMessage("hi", webview.thisURL+"/lib/piskel/index.html");//);
+  };
+
+  webview.onloadredirect = function(Ev) {
+    //console.log(Ev);
+  };
+
+  webview.onexit = function(Ev) {
+    //console.log(Ev);
+  };
+
+  webview.thisURL = "chrome-extension://"+chrome.runtime.id;
+  addEventListener("message", function(Ev) {
+    //console.log(Ev);
+    //var url = URL.createObjectURL(Ev.data[0]);
+    chrome.fileSystem.chooseEntry({ type: "saveFile", suggestedName: Ev.data[1] }, function(wE) {
+      wE.createWriter(function(fW) {
+        fW.write(new Blob([Ev.data[0]], {type: "application/json"}));
+      });
+      //writeFileEntry(wE, url, function(E) { console.log("wrote file"); });
+    });
   });
 
   piskel.push(document.body.appendChild(webview));

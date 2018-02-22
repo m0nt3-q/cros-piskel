@@ -1,10 +1,10 @@
 {
   "name": "Piskel",
   "description": "Chrome OS Piskel",
-  "version": "1.4",
+  "version": "1.4.2",
   "manifest_version": 2,
   "icons": {
-    "128": "piskel/logo.png"
+    "128": "lib/piskel/logo.png"
   },
   "app": {
     "background": {
@@ -12,46 +12,61 @@
     }
   },
   "permissions": [
-    "webview", "contextMenus", "storage"
+    "webview", "contextMenus", "storage", {"fileSystem": ["write"]}
   ],
   "webview": {
     "partitions": [
       {
         "name": "static",
         "accessible_resources": [
-          "piskel/index.html",
-          "piskel/logo.png",
-          "piskel/js/piskel-packaged-2017-10-13-02-02.js",
-          "piskel/js/piskel-packaged-min-2017-10-14-01-43.js",
-          "piskel/js/lib/gif/gif.ie.worker.js",
-          "piskel/piskelapp-partials/main-partial.html",
-          "piskel/css/piskel-style-packaged-2017-10-14-01-43.css",
-          "piskel/css/fonts/icomoon.eot",
-          "piskel/css/fonts/icomoon.svg",
-          "piskel/css/fonts/icomoon.ttf",
-          "piskel/css/fonts/icomoon.woff",
-          "piskel/css/fonts/piskel.eot",
-          "piskel/css/fonts/piskel.svg",
-          "piskel/css/fonts/piskel.ttf",
-          "piskel/css/fonts/piskel.woff",
-          "piskel/img/favicon.png",
-          "piskel/img/icons.png",
-          "piskel/img/icons@2x.png",
-          "piskel/img/cursors/wand.png",
-          "piskel/img/cursors/vertical-mirror-pen.png",
-          "piskel/img/cursors/stroke.png",
-          "piskel/img/cursors/select.png",
-          "piskel/img/cursors/rectangle.png",
-          "piskel/img/cursors/pen.png",
-          "piskel/img/cursors/paint-bucket.png",
-          "piskel/img/cursors/mirror-pen.png",
-          "piskel/img/cursors/lighten.png",
-          "piskel/img/cursors/hand.png",
-          "piskel/img/cursors/eraser.png",
-          "piskel/img/cursors/dropper.png",
-          "piskel/img/cursors/dither.png",
-          "piskel/img/cursors/color-palette.png",
-          "piskel/img/cursors/circle.png"
+          "lib/piskel/index.html",
+          "lib/piskel/logo.png",
+          "lib/piskel/js/piskel-packaged-2017-10-14-01-43.js",
+          "lib/piskel/js/piskel-packaged-min-2017-10-14-01-43.js",
+          "lib/piskel/js/lib/gif/gif.ie.worker.js",
+          "lib/piskel/piskelapp-partials/main-partial.html",
+          "lib/piskel/css/piskel-style-packaged-2017-10-14-01-43.css",
+          "lib/piskel/css/fonts/icomoon.eot",
+          "lib/piskel/css/fonts/icomoon.svg",
+          "lib/piskel/css/fonts/icomoon.ttf",
+          "lib/piskel/css/fonts/icomoon.woff",
+          "lib/piskel/css/fonts/piskel.eot",
+          "lib/piskel/css/fonts/piskel.svg",
+          "lib/piskel/css/fonts/piskel.ttf",
+          "lib/piskel/css/fonts/piskel.woff",
+          "lib/piskel/img/favicon.png",
+          "lib/piskel/img/icons.png",
+          "lib/piskel/img/icons@2x.png",
+          "lib/piskel/img/cursors/wand.png",
+          "lib/piskel/img/cursors/vertical-mirror-pen.png",
+          "lib/piskel/img/cursors/stroke.png",
+          "lib/piskel/img/cursors/select.png",
+          "lib/piskel/img/cursors/rectangle.png",
+          "lib/piskel/img/cursors/pen.png",
+          "lib/piskel/img/cursors/paint-bucket.png",
+          "lib/piskel/img/cursors/mirror-pen.png",
+          "lib/piskel/img/cursors/lighten.png",
+          "lib/piskel/img/cursors/hand.png",
+          "lib/piskel/img/cursors/eraser.png",
+          "lib/piskel/img/cursors/dropper.png",
+          "lib/piskel/img/cursors/dither.png",
+          "lib/piskel/img/cursors/color-palette.png",
+          "lib/piskel/img/cursors/circle.png",
+          "lib/piskel/img/icons/tools/tool-colorpicker.png",
+          "lib/piskel/img/icons/tools/tool-dithering.png",
+          "lib/piskel/img/icons/tools/tool-lighten.png",
+          "lib/piskel/img/icons/tools/tool-lasso-select.png",
+          "lib/piskel/img/icons/tools/tool-rectangle-select.png",
+          "lib/piskel/img/icons/tools/tool-shape-select.png",
+          "lib/piskel/img/icons/tools/tool-move.png",
+          "lib/piskel/img/icons/tools/tool-circle.png",
+          "lib/piskel/img/icons/tools/tool-rectangle.png",
+          "lib/piskel/img/icons/tools/tool-stroke.png",
+          "lib/piskel/img/icons/tools/tool-eraser.png",
+          "lib/piskel/img/icons/tools/tool-colorswap.png",
+          "lib/piskel/img/icons/tools/tool-paint-bucket.png",
+          "lib/piskel/img/icons/tools/tool-vertical-mirror-pen.png",
+          "lib/piskel/img/icons/tools/tool-pen.png"
         ]
       }
     ]
