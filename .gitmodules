@@ -1,0 +1,3 @@
+[submodule "piskel"]
+	path = piskel
+	url = ./piskel
