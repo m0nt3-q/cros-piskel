@@ -1,14 +1,14 @@
 function uuid() {
-  var _char = function() {
+  var ID = function() {
     return Math.random().toString(16).slice(-4);
   };
 
-  var id = _char() + _char() +"-"+ _char();
+  var UUID = ID() + ID() +"-"+ ID();
 
-  return id;
+  return UUID;
 };
 
-chrome.app.runtime.onLaunched.addListener(function() {
+chrome.app.runtime.onLaunched.addListener(function(LaunchData) {
   chrome.app.window.create("index.html", {
     "id": "piskel",
     "icon": "./lib/piskel/logo.png",
@@ -20,19 +20,6 @@ chrome.app.runtime.onLaunched.addListener(function() {
   function(Win) {
     Win.contentWindow.onload = function() {
       var webview = Win.contentWindow.document.getElementById("piskel-webview");
-      /*webview.addEventListener("newwindow", function(Ev) {
-        ////Ev.preventDefault();
-
-        chrome.app.window.create("index.html", {
-          "id": uuid(),
-          "icon": "./lib/piskel/logo.png",
-          "outerBounds": {
-            "width": 900,
-            "height": 600
-          }
-        });
-
-      });*/
     };
   });
 });

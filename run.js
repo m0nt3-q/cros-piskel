@@ -1,11 +1,11 @@
 function uuid() {
-  var _char = function() {
+  var ID = function() {
     return Math.random().toString(16).slice(-4);
   };
 
-  var id = _char() + _char() +"-"+ _char();
+  var UUID = ID() + ID() +"-"+ ID();
 
-  return id;
+  return UUID;
 };
 
 piskel = [];
@@ -130,23 +130,18 @@ document.onreadystatechange = function() { if(document.readyState == 'complete')
         webview.focus();
       });
     }
-
-    //Ev.dialog.cancel();
   };
 
   webview.onpermissionrequest = function(Ev) {
-    //console.log(Ev);
     if(Ev.permission === "download") {
       Ev.request.allow();
     }
   };
 
   webview.onnewwindow = function(Ev) {
-    //console.log(Ev);
   };
 
   webview.onloadabort = function(Ev) {
-    //console.log(Ev);
   };
 
   webview.onloadstart = function(Ev) {
@@ -156,27 +151,21 @@ document.onreadystatechange = function() { if(document.readyState == 'complete')
     }
   };
   webview.onloadstop = function(Ev) {
-    //console.log(Ev);
     webview.contentWindow.postMessage("hi", webview.thisURL+"/lib/piskel/index.html");//);
   };
 
   webview.onloadredirect = function(Ev) {
-    //console.log(Ev);
   };
 
   webview.onexit = function(Ev) {
-    //console.log(Ev);
   };
 
   webview.thisURL = "chrome-extension://"+chrome.runtime.id;
   addEventListener("message", function(Ev) {
-    //console.log(Ev);
-    //var url = URL.createObjectURL(Ev.data[0]);
-    chrome.fileSystem.chooseEntry({ type: "saveFile", suggestedName: Ev.data[1] }, function(wE) {
-      wE.createWriter(function(fW) {
-        fW.write(new Blob([Ev.data[0]], {type: "application/json"}));
+    chrome.fileSystem.chooseEntry({ type: "saveFile", suggestedName: Ev.data[1] }, function(WriteEntry) {
+      WriteEntry.createWriter(function(FileWriter) {
+        FileWriter.write(new Blob([Ev.data[0]], {type: "application/json"}));
       });
-      //writeFileEntry(wE, url, function(E) { console.log("wrote file"); });
     });
   });
 
